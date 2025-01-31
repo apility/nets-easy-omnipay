@@ -26,6 +26,10 @@ trait HasSecretKey
      */
     public function getHostName()
     {
-        return $this->getTestMode() ? 'test.api.dibspayment.eu' : 'api.dibspayment.eu';
+        if (method_exists($this, 'getTestMode')) {
+            return $this->getTestMode() ? 'test.api.dibspayment.eu' : 'api.dibspayment.eu';
+        }
+
+        return 'api.dibspayment.eu';
     }
 }

@@ -13,6 +13,10 @@ trait HasCredentials
      */
     public function getTestMode()
     {
-        return strpos($this->getSecretKey(), 'test-') === 0;
+        if (strpos($this->getSecretKey(), 'test-') === 0) {
+            return true;
+        }
+
+        return !!$this->getParameter('testMode');
     }
 }

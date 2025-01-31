@@ -25,6 +25,7 @@ class Gateway extends AbstractGateway
             'merchantNumber' => '',
             'secretKey' => '',
             'checkoutKey' => '',
+            'testMode' => false,
         );
     }
 
@@ -46,7 +47,7 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @return string|null $value 
+     * @return string|null
      */
     public function getSecretKey()
     {
@@ -77,6 +78,23 @@ class Gateway extends AbstractGateway
     public function setCheckoutKey($value)
     {
         return $this->setParameter('checkoutKey', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTestMode()
+    {
+        return !!$this->getParameter('testMode');
+    }
+
+    /**
+     * @param bool $value
+     * @return static
+     */
+    public function setTestMode($value)
+    {
+        return $this->setParameter('testMode', $value);
     }
 
     /**

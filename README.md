@@ -46,6 +46,10 @@ $gateway = $factory->create(NetsEasyGateway::class);
 $gateway->setMerchantNumber(/* ... */);
 $gateway->setSecretKey(/* ... */);
 $gateway->setCheckoutKey(/* ... */);
+
+// Some API keys contains the "test-" prefix. If this is present, we automatically enable test mode.
+// However, if your API key does not contain this prefix, you can manually toggle test mode using this method:
+$gateway->setTestMode(true);
 ```
 
 ### Hosted Payment Page
