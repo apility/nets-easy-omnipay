@@ -11,7 +11,7 @@ use Apility\Omnipay\NetsEasy\Traits\Request;
 class RefundRequest extends AbstractRequest
 {
     use Request\HasIdempotencyKey;
-    use Request\HasChargeId;
+    use Request\HasPaymentId;
     use Request\HasAmount;
     use Request\HasOrderItems;
     use Request\HasMyReference;
@@ -26,7 +26,7 @@ class RefundRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->buildEndpoint(sprintf('charges/%s/refunds', $this->getChargeId()));
+        return $this->buildEndpoint(sprintf('payments/%s/refunds', $this->getPaymentId()));
     }
 
     /**

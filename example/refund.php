@@ -24,17 +24,15 @@ if ($transaction->getRefundedAmount() === $transaction->getChargedAmount()) {
     die('Payment refunded: ' . $transaction->getRefundId());
 }
 
-foreach ($transaction->getCharges() as $charge) {
-    $refund = $gateway->refund([
-        'chargeId' => $charge['chargeId'],
-        'amount' => $charge['amount'],
-    ])->send();
+$refund = $gateway->refund([
+    'paymentId' => $transaction->getPaymentId(),
+    'amount' => $transaction->getOrderDetails()['amount'],
+])->send();
 
-    if (!$refund->isSuccessful()) {
-        echo '<a href="index.php">Go back</a><br>';
-        die('Refund failed: ' . $refund->getMessage());
-    }
-
+if (!$refund->isSuccessful()) {
     echo '<a href="index.php">Go back</a><br>';
-    die('Payment refunded: ' . $refund->getRefundId());
+    die('Refund failed: ' . $refund->getMessage());
 }
+
+echo '<a href="index.php">Go back</a><br>';
+die('Payment refunded: ' . $refund->getRefundId());
