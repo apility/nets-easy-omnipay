@@ -9,8 +9,12 @@ trait HasRefundedAmount
      */
     public function getRefundedAmount()
     {
-        if (isset($this->getSummary()['refundedAmount'])) {
-            return $this->getSummary()['refundedAmount'];
+        $amount = 0;
+
+        foreach ($this->getRefunds() ?? [] as $refund) {
+            $amount += $refund['amount'] ?? 0;
         }
+
+        return $amount;
     }
 }
